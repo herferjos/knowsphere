@@ -73,7 +73,7 @@ if seleccion_menu == "Inicio":
     if 'inicio' in st.session_state:
         universidad = st.selectbox(
             'Universidad',
-            ('UAM', 'Universidad de Málaga', 'Universidad Europea')
+            ('Universidad Autónoma de Madrid', 'Universidad Complutense de Madrid', 'Universidad de Málaga', 'Universidad Europea')
         )
 
         if universidad == "UAM":
