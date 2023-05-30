@@ -1,3 +1,4 @@
+#cargando los módulos y librerias necesarias
 import os
 import streamlit as st
 os.environ["OPENAI_API_KEY"] = st.secrets["OpenAI"]
@@ -12,7 +13,7 @@ from streamlit_chat import message as st_message
 from streamlit_option_menu import option_menu
 
 
-
+#definimos la funcion de chat
 def chatbot(pregunta):
     if 'chat_history' not in st.session_state:
         st.session_state['chat_history'] = []
@@ -66,7 +67,7 @@ st.markdown(
 
 st.write("---")
 
-#SELECCION UNIVERSIDAD-GRADO
+#SELECCION UNIVERSIDAD E INICIO DE SESIÓN
 if seleccion_menu == "Inicio":
 
     st.write("## Iniciar Sesión")
@@ -93,12 +94,14 @@ if seleccion_menu == "Inicio":
 #SECCION CHATEAR
 if seleccion_menu == "Chat":
     if 'inicio' in st.session_state:
-
+        
+        #PERMITE SELECCIONAR LA ASIGNATURA DESEADA
         asignatura = st.selectbox(
             'Elige la asignatura',
             ('Genómica', 'Matemáticas', 'Derecho Internacional', 'Historia')
         )
         
+        #PERMITE CAMBIAR DE ASIGNATURA. A SU VEZ LIMPIA EL HISTORIAL Y EL FICHERO PARA ENCONTRAR LA BASE DE DATOS
         if st.button(label = "Seleccionar", type = "primary"):
             if asignatura == "Genómica":
                 st.session_state['persist_directory'] = 'apuntes/biologia'
@@ -118,16 +121,20 @@ if seleccion_menu == "Chat":
                 st.session_state['history'] = []
                 st.session_state['chat_history'] = []
                 st.experimental_rerun()
+        
+        #MUESTRA LA ASIGNATURA SELECCIONADA
         if 'asignatura' in st.session_state:
             st.write(f"## Asignatura: {st.session_state.asignatura}")
-
+            
+            #MUESTRA EL HISTORIAL DE CONVERSACIÓN
             if 'history' in st.session_state:
                 for i, chat in enumerate(st.session_state.history):
                     st_message(**chat, key=str(i)) #unpacking
 
-
+            #MUESTRA LA CAJA PARA EL INPUT DEL USUARIO
             pregunta = st.text_input("Pregunta lo que quieras")
-
+            
+            #PERMITE MANDAR LA REQUEST O BORRAR EL HISTORIAL
             columna1,columna2 = st.columns([0.1,1])
             with columna1:
                 if st.button(label = "Chatear", type = "primary"):
@@ -139,5 +146,6 @@ if seleccion_menu == "Chat":
                     st.session_state['chat_history'] = []
                     st.experimental_rerun()
     else:
+        #DENIEGA EL ACCESO SI NO SE HA INICIADO SESIÓN
         st.markdown("<h3 style='text-align: center;'>⛔Acceso Denegado⛔</h3>", unsafe_allow_html=True)
         st.error("Debes Iniciar Sesión en la primera página para poder continuar...")
