@@ -76,7 +76,7 @@ if seleccion_menu == "Inicio":
             ('Universidad Autónoma de Madrid', 'Universidad Complutense de Madrid', 'Universidad de Málaga', 'Universidad Europea')
         )
 
-        if universidad == "UAM":
+        if universidad == "Universidad Autónoma de Madrid":
             asignatura = st.selectbox(
                 'Elige la asignatura',
                 ('Genómica', 'Matemáticas', 'Derecho Internacional', 'Historia')
@@ -98,6 +98,8 @@ if seleccion_menu == "Inicio":
                     st.session_state['asignatura'] = "Historia"
                     st.session_state['history'] = []
                     st.session_state['chat_history'] = []
+        else:
+            pass
 
     if 'inicio' not in st.session_state:
         st.write("## Iniciar Sesión")
