@@ -85,12 +85,18 @@ if seleccion_menu == "Inicio":
             if grado == "Biología":
                 st.session_state['persist_directory'] = 'apuntes/biologia'
                 st.session_state['grado'] = "Biología"
+                st.session_state['history'] = []
+                st.session_state['chat_history'] = []
             elif grado == "Derecho Internacional":
                 st.session_state['persist_directory'] = 'apuntes/derecho_internacional'
                 st.session_state['grado'] = "Derecho Internacional"
+                st.session_state['history'] = []
+                st.session_state['chat_history'] = []
             elif grado == "Historia":
                 st.session_state['persist_directory'] = 'apuntes/historia'
                 st.session_state['grado'] = "Historia"
+                st.session_state['history'] = []
+                st.session_state['chat_history'] = []
 
     if 'inicio' not in st.session_state:
         st.write("## Iniciar Sesión")
@@ -111,7 +117,7 @@ if seleccion_menu == "Inicio":
 #SECCION CHATEAR
 if seleccion_menu == "Chat":
     if 'inicio' in st.session_state:
-        st.write(f"## Grado: {st.session_state.grado}")
+        st.write(f"## Asignatura: {st.session_state.asignatura}")
 
         if 'history' in st.session_state:
             for i, chat in enumerate(st.session_state.history):
