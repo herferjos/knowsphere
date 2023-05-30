@@ -3,3 +3,5 @@ openai
 langchain
 chromadb
 pypdf
+streamlit-chat
+streamlit-option-menu
