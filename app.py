@@ -40,7 +40,6 @@ def chatbot(pregunta):
 
 
 #-----------------------------------------------------------------APP STREAMLIT----------------------------------------------------------------------------------------
-
 #CONFIGURACION DE LA PAGINA
 st.set_page_config(page_title="KnowSphere", page_icon="📚", layout="wide")
 
@@ -70,72 +69,75 @@ st.write("---")
 #SELECCION UNIVERSIDAD-GRADO
 if seleccion_menu == "Inicio":
 
+    st.write("## Iniciar Sesión")
+    with st.form(key="formulario"):
+        universidad = st.selectbox('Universidad',
+                                    ('Universidad Autónoma de Madrid', 'Universidad Complutense de Madrid', 'Universidad de Málaga', 'Universidad Europea')
+                                    )
+        usuario = st.text_input(label='Nombre', placeholder="Escribe un nombre al que dirigirnos")
+        email = st.text_input(label='Email', placeholder="Escribe un email con el que poder contactar")
+        consentimiento = st.checkbox("Acepto los términos y condiciones de la plataforma KnowSphere")
+        aceptar_boton = st.form_submit_button(label="¡Empezar!")
+
+    if consentimiento and aceptar_boton:
+        if re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
+            st.session_state['inicio'] = True
+            st.experimental_rerun()
+        else:
+            st.warning("Por favor, introduce un email válido.")
+    
     if 'inicio' in st.session_state:
+        st.success("¡Has iniciado sesión correctamente, usa la pestaña Chat para comenzar!")
+
+
+#SECCION CHATEAR
+if seleccion_menu == "Chat":
+    if 'inicio' in st.session_state:
+
         asignatura = st.selectbox(
             'Elige la asignatura',
             ('Genómica', 'Matemáticas', 'Derecho Internacional', 'Historia')
         )
         
         if st.button(label = "Seleccionar", type = "primary"):
-            if asignatura == "Biología":
+            if asignatura == "Genómica":
                 st.session_state['persist_directory'] = 'apuntes/biologia'
-                st.session_state['asignatura'] = "Biología"
+                st.session_state['asignatura'] = "Genómica"
                 st.session_state['history'] = []
                 st.session_state['chat_history'] = []
+                st.experimental_rerun()
             elif asignatura == "Derecho Internacional":
                 st.session_state['persist_directory'] = 'apuntes/derecho_internacional'
                 st.session_state['asignatura'] = "Derecho Internacional"
                 st.session_state['history'] = []
                 st.session_state['chat_history'] = []
+                st.experimental_rerun()
             elif asignatura == "Historia":
                 st.session_state['persist_directory'] = 'apuntes/historia'
                 st.session_state['asignatura'] = "Historia"
                 st.session_state['history'] = []
                 st.session_state['chat_history'] = []
-    else:
-        pass
-
-    if 'inicio' not in st.session_state:
-        st.write("## Iniciar Sesión")
-        with st.form(key="formulario"):
-            universidad = st.selectbox('Universidad',
-                                       ('Universidad Autónoma de Madrid', 'Universidad Complutense de Madrid', 'Universidad de Málaga', 'Universidad Europea')
-                                       )
-            usuario = st.text_input(label='Nombre', placeholder="Escribe un nombre al que dirigirnos")
-            email = st.text_input(label='Email', placeholder="Escribe un email con el que poder contactar")
-            consentimiento = st.checkbox("Acepto los términos y condiciones de la plataforma KnowSphere")
-            aceptar_boton = st.form_submit_button(label="¡Empezar!")
-
-        if consentimiento and aceptar_boton:
-            if re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
-                st.session_state['inicio'] = True
                 st.experimental_rerun()
-            else:
-                st.warning("Por favor, introduce un email válido.")
+        if 'asignatura' in st.session_state:
+            st.write(f"## Asignatura: {st.session_state.asignatura}")
+
+            if 'history' in st.session_state:
+                for i, chat in enumerate(st.session_state.history):
+                    st_message(**chat, key=str(i)) #unpacking
 
 
-#SECCION CHATEAR
-if seleccion_menu == "Chat":
-    if 'inicio' in st.session_state:
-        st.write(f"## Asignatura: {st.session_state.asignatura}")
+            pregunta = st.text_input("Pregunta lo que quieras")
 
-        if 'history' in st.session_state:
-            for i, chat in enumerate(st.session_state.history):
-                st_message(**chat, key=str(i)) #unpacking
-
-
-        pregunta = st.text_input("Pregunta lo que quieras")
-
-        columna1,columna2 = st.columns([0.1,1])
-        with columna1:
-            if st.button(label = "Chatear", type = "primary"):
-                chatbot(pregunta)
-                st.experimental_rerun()
-        with columna2:
-            if st.button(label="Borrar historial", type = "primary"):
-                st.session_state['history'] = []
-                st.session_state['chat_history'] = []
-                st.experimental_rerun()
+            columna1,columna2 = st.columns([0.1,1])
+            with columna1:
+                if st.button(label = "Chatear", type = "primary"):
+                    chatbot(pregunta)
+                    st.experimental_rerun()
+            with columna2:
+                if st.button(label="Borrar historial", type = "primary"):
+                    st.session_state['history'] = []
+                    st.session_state['chat_history'] = []
+                    st.experimental_rerun()
     else:
         st.markdown("<h3 style='text-align: center;'>⛔Acceso Denegado⛔</h3>", unsafe_allow_html=True)
         st.error("Debes Iniciar Sesión en la primera página para poder continuar...")
