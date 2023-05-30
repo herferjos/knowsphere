@@ -130,6 +130,6 @@ if seleccion_menu == "Chat":
             st.session_state['history'] = []
             st.experimental_rerun()
 
-   st.write(st.session_state.resultado)      
+st.write(st.session_state.resultado)      
 
 
