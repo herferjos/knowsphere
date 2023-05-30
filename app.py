@@ -128,6 +128,7 @@ if seleccion_menu == "Chat":
     with columna2:
         if st.button(label="Borrar historial", type = "primary"):
             st.session_state['history'] = []
+            st.session_state['chat_history'] = []
             st.experimental_rerun()
 
 st.write(st.session_state.resultado)      
