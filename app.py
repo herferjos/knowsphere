@@ -74,8 +74,8 @@ if seleccion_menu == "Inicio":
         universidad = st.selectbox('Universidad',
                                     ('Universidad Autónoma de Madrid', 'Universidad Complutense de Madrid', 'Universidad de Málaga', 'Universidad Europea')
                                     )
-        usuario = st.text_input(label='Nombre', placeholder="Escribe un nombre al que dirigirnos")
-        email = st.text_input(label='Email', placeholder="Escribe un email con el que poder contactar")
+        usuario = st.text_input(label='Usuario', placeholder="Escribe tu usuario")
+        email = st.text_input(label='Email', placeholder="Escribe el email de la universidad")
         consentimiento = st.checkbox("Acepto los términos y condiciones de la plataforma KnowSphere")
         aceptar_boton = st.form_submit_button(label="¡Empezar!")
 
