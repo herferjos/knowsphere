@@ -79,24 +79,24 @@ if seleccion_menu == "Inicio":
         if universidad == "UAM":
             asignatura = st.selectbox(
                 'Elige la asignatura',
-                ('Biología', 'Matemáticas', 'Derecho Internacional', 'Historia')
+                ('Genómica', 'Matemáticas', 'Derecho Internacional', 'Historia')
             )
-
-            if asignatura == "Biología":
-                st.session_state['persist_directory'] = 'apuntes/biologia'
-                st.session_state['asignatura'] = "Biología"
-                st.session_state['history'] = []
-                st.session_state['chat_history'] = []
-            elif asignatura == "Derecho Internacional":
-                st.session_state['persist_directory'] = 'apuntes/derecho_internacional'
-                st.session_state['asignatura'] = "Derecho Internacional"
-                st.session_state['history'] = []
-                st.session_state['chat_history'] = []
-            elif asignatura == "Historia":
-                st.session_state['persist_directory'] = 'apuntes/historia'
-                st.session_state['asignatura'] = "Historia"
-                st.session_state['history'] = []
-                st.session_state['chat_history'] = []
+            if st.button(label = "Cambiar de asignatura", type = "primary"):
+                if asignatura == "Biología":
+                    st.session_state['persist_directory'] = 'apuntes/biologia'
+                    st.session_state['asignatura'] = "Biología"
+                    st.session_state['history'] = []
+                    st.session_state['chat_history'] = []
+                elif asignatura == "Derecho Internacional":
+                    st.session_state['persist_directory'] = 'apuntes/derecho_internacional'
+                    st.session_state['asignatura'] = "Derecho Internacional"
+                    st.session_state['history'] = []
+                    st.session_state['chat_history'] = []
+                elif asignatura == "Historia":
+                    st.session_state['persist_directory'] = 'apuntes/historia'
+                    st.session_state['asignatura'] = "Historia"
+                    st.session_state['history'] = []
+                    st.session_state['chat_history'] = []
 
     if 'inicio' not in st.session_state:
         st.write("## Iniciar Sesión")
