@@ -34,7 +34,6 @@ def chatbot(pregunta):
         result_text += f"Fuente: {source.metadata['source']}  //  Página: {source.metadata['page']}\n\n Cita: ''{source.page_content}''\n\n"
 
     st.session_state.history.append({"message": result_text, "is_user": False})
-    st.session_state['resultado'] = result
     return
 
 
@@ -130,7 +129,4 @@ if seleccion_menu == "Chat":
             st.session_state['history'] = []
             st.session_state['chat_history'] = []
             st.experimental_rerun()
-
-st.write(st.session_state.resultado)      
-
 
