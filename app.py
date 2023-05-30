@@ -81,7 +81,7 @@ if seleccion_menu == "Inicio":
                 'Elige la asignatura',
                 ('Genómica', 'Matemáticas', 'Derecho Internacional', 'Historia')
             )
-            asignatura
+            
             if st.button(label = "Seleccionar", type = "primary"):
                 if asignatura == "Biología":
                     st.session_state['persist_directory'] = 'apuntes/biologia'
