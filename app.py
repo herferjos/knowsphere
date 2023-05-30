@@ -81,18 +81,19 @@ if seleccion_menu == "Inicio":
                 'Elige la asignatura',
                 ('Genómica', 'Matemáticas', 'Derecho Internacional', 'Historia')
             )
+            st.session_state['seleccion'] = asignatura
             if st.button(label = "Cambiar de asignatura", type = "primary"):
-                if asignatura == "Biología":
+                if st.session_state.seleccion == "Biología":
                     st.session_state['persist_directory'] = 'apuntes/biologia'
                     st.session_state['asignatura'] = "Biología"
                     st.session_state['history'] = []
                     st.session_state['chat_history'] = []
-                elif asignatura == "Derecho Internacional":
+                elif st.session_state.seleccion == "Derecho Internacional":
                     st.session_state['persist_directory'] = 'apuntes/derecho_internacional'
                     st.session_state['asignatura'] = "Derecho Internacional"
                     st.session_state['history'] = []
                     st.session_state['chat_history'] = []
-                elif asignatura == "Historia":
+                elif st.session_state.seleccion == "Historia":
                     st.session_state['persist_directory'] = 'apuntes/historia'
                     st.session_state['asignatura'] = "Historia"
                     st.session_state['history'] = []
