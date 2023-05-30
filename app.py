@@ -110,23 +110,27 @@ if seleccion_menu == "Inicio":
 
 #SECCION CHATEAR
 if seleccion_menu == "Chat":
-    st.write(f"## Grado: {st.session_state.grado}")
+    if 'inicio' in st.session_state:
+        st.write(f"## Grado: {st.session_state.grado}")
 
-    if 'history' in st.session_state:
-        for i, chat in enumerate(st.session_state.history):
-            st_message(**chat, key=str(i)) #unpacking
+        if 'history' in st.session_state:
+            for i, chat in enumerate(st.session_state.history):
+                st_message(**chat, key=str(i)) #unpacking
 
 
-    pregunta = st.text_input("Pregunta lo que quieras")
+        pregunta = st.text_input("Pregunta lo que quieras")
 
-    columna1,columna2 = st.columns([0.1,1])
-    with columna1:
-        if st.button(label = "Chatear", type = "primary"):
-            chatbot(pregunta)
-            st.experimental_rerun()
-    with columna2:
-        if st.button(label="Borrar historial", type = "primary"):
-            st.session_state['history'] = []
-            st.session_state['chat_history'] = []
-            st.experimental_rerun()
+        columna1,columna2 = st.columns([0.1,1])
+        with columna1:
+            if st.button(label = "Chatear", type = "primary"):
+                chatbot(pregunta)
+                st.experimental_rerun()
+        with columna2:
+            if st.button(label="Borrar historial", type = "primary"):
+                st.session_state['history'] = []
+                st.session_state['chat_history'] = []
+                st.experimental_rerun()
+    else:
+        st.markdown("<h3 style='text-align: center;'>⛔Acceso Denegado⛔</h3>", unsafe_allow_html=True)
+        st.error("Debes Iniciar Sesión en la primera página para poder continuar...")
 
