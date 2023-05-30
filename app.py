@@ -77,24 +77,24 @@ if seleccion_menu == "Inicio":
         )
 
         if universidad == "UAM":
-            grado = st.selectbox(
+            asignatura = st.selectbox(
                 'Elige la asignatura',
                 ('Biología', 'Matemáticas', 'Derecho Internacional', 'Historia')
             )
 
-            if grado == "Biología":
+            if asignatura == "Biología":
                 st.session_state['persist_directory'] = 'apuntes/biologia'
-                st.session_state['grado'] = "Biología"
+                st.session_state['asignatura'] = "Biología"
                 st.session_state['history'] = []
                 st.session_state['chat_history'] = []
-            elif grado == "Derecho Internacional":
+            elif asignatura == "Derecho Internacional":
                 st.session_state['persist_directory'] = 'apuntes/derecho_internacional'
-                st.session_state['grado'] = "Derecho Internacional"
+                st.session_state['asignatura'] = "Derecho Internacional"
                 st.session_state['history'] = []
                 st.session_state['chat_history'] = []
-            elif grado == "Historia":
+            elif asignatura == "Historia":
                 st.session_state['persist_directory'] = 'apuntes/historia'
-                st.session_state['grado'] = "Historia"
+                st.session_state['asignatura'] = "Historia"
                 st.session_state['history'] = []
                 st.session_state['chat_history'] = []
 
