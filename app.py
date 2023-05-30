@@ -120,7 +120,7 @@ if seleccion_menu == "Chat":
 
     pregunta = st.text_input("Pregunta lo que quieras")
 
-    columna1,columna2 = st.columns([0.08,1])
+    columna1,columna2 = st.columns([0.1,1])
     with columna1:
         if st.button(label = "Chatear", type = "primary"):
             chatbot(pregunta)
@@ -129,5 +129,7 @@ if seleccion_menu == "Chat":
         if st.button(label="Borrar historial", type = "primary"):
             st.session_state['history'] = []
             st.experimental_rerun()
+
+   st.write(st.session_state.resultado)      
 
 
