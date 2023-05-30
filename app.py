@@ -71,39 +71,36 @@ st.write("---")
 if seleccion_menu == "Inicio":
 
     if 'inicio' in st.session_state:
-        universidad = st.selectbox(
-            'Universidad',
-            ('Universidad Autónoma de Madrid', 'Universidad Complutense de Madrid', 'Universidad de Málaga', 'Universidad Europea')
+        asignatura = st.selectbox(
+            'Elige la asignatura',
+            ('Genómica', 'Matemáticas', 'Derecho Internacional', 'Historia')
         )
-
-        if universidad == "Universidad Autónoma de Madrid":
-            asignatura = st.selectbox(
-                'Elige la asignatura',
-                ('Genómica', 'Matemáticas', 'Derecho Internacional', 'Historia')
-            )
-            
-            if st.button(label = "Seleccionar", type = "primary"):
-                if asignatura == "Biología":
-                    st.session_state['persist_directory'] = 'apuntes/biologia'
-                    st.session_state['asignatura'] = "Biología"
-                    st.session_state['history'] = []
-                    st.session_state['chat_history'] = []
-                elif asignatura == "Derecho Internacional":
-                    st.session_state['persist_directory'] = 'apuntes/derecho_internacional'
-                    st.session_state['asignatura'] = "Derecho Internacional"
-                    st.session_state['history'] = []
-                    st.session_state['chat_history'] = []
-                elif asignatura == "Historia":
-                    st.session_state['persist_directory'] = 'apuntes/historia'
-                    st.session_state['asignatura'] = "Historia"
-                    st.session_state['history'] = []
-                    st.session_state['chat_history'] = []
-        else:
-            pass
+        
+        if st.button(label = "Seleccionar", type = "primary"):
+            if asignatura == "Biología":
+                st.session_state['persist_directory'] = 'apuntes/biologia'
+                st.session_state['asignatura'] = "Biología"
+                st.session_state['history'] = []
+                st.session_state['chat_history'] = []
+            elif asignatura == "Derecho Internacional":
+                st.session_state['persist_directory'] = 'apuntes/derecho_internacional'
+                st.session_state['asignatura'] = "Derecho Internacional"
+                st.session_state['history'] = []
+                st.session_state['chat_history'] = []
+            elif asignatura == "Historia":
+                st.session_state['persist_directory'] = 'apuntes/historia'
+                st.session_state['asignatura'] = "Historia"
+                st.session_state['history'] = []
+                st.session_state['chat_history'] = []
+    else:
+        pass
 
     if 'inicio' not in st.session_state:
         st.write("## Iniciar Sesión")
         with st.form(key="formulario"):
+            universidad = st.selectbox('Universidad',
+                                       ('Universidad Autónoma de Madrid', 'Universidad Complutense de Madrid', 'Universidad de Málaga', 'Universidad Europea')
+                                       )
             usuario = st.text_input(label='Nombre', placeholder="Escribe un nombre al que dirigirnos")
             email = st.text_input(label='Email', placeholder="Escribe un email con el que poder contactar")
             consentimiento = st.checkbox("Acepto los términos y condiciones de la plataforma KnowSphere")
@@ -142,4 +139,3 @@ if seleccion_menu == "Chat":
     else:
         st.markdown("<h3 style='text-align: center;'>⛔Acceso Denegado⛔</h3>", unsafe_allow_html=True)
         st.error("Debes Iniciar Sesión en la primera página para poder continuar...")
-
